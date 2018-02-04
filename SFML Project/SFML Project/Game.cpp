@@ -30,6 +30,7 @@ void Game::Update(float DeltaTime)
 				{
 					Square->SetPieceOccupyingSquare(nullptr);
 					mHeldPiece = Piece;
+					mHeldPieceOrigin = sf::Vector2u(Index.x, Index.y);
 				}
 			}
 		}
@@ -47,14 +48,24 @@ void Game::Update(float DeltaTime)
 		if (mHeldPiece)
 		{
 			//Drop piece
-			
+
 			if (Index.x < 8 && Index.y < 8 && Index.x > -1 && Index.y > -1)
 			{
-				ChessSquare* Square = mChessBoard.GetSquare(Index.x, Index.y);
-				ChessPiece* Piece = Square->GetPieceOccupyingSquare();
-	
-				if (!Piece)
+				if ( mHeldPiece->IsMoveLegal(mHeldPieceOrigin, sf::Vector2u(Index.x, Index.y)) )
 				{
+					ChessSquare* Square = mChessBoard.GetSquare(Index.x, Index.y);
+					ChessPiece* Piece = Square->GetPieceOccupyingSquare();
+
+					if (!Piece)
+					{
+						mHeldPiece->SetPosition(Square->GetPosition());
+						Square->SetPieceOccupyingSquare(mHeldPiece);
+						mHeldPiece = nullptr;
+					}
+				}
+				else //if move isnt legal, return piece to its origin
+				{
+					ChessSquare* Square = mChessBoard.GetSquare(mHeldPieceOrigin.x, mHeldPieceOrigin.y);
 					mHeldPiece->SetPosition(Square->GetPosition());
 					Square->SetPieceOccupyingSquare(mHeldPiece);
 					mHeldPiece = nullptr;
