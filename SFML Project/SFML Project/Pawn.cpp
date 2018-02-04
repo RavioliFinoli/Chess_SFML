@@ -16,6 +16,7 @@ void Pawn::Initialize(sf::Color PlayerColor, sf::Vector2f Position)
 	mSprite.setPosition(Position);
 	mSprite.setSize(sf::Vector2f((float)SQUARE_SIZE, (float)SQUARE_SIZE));
 	mSprite.setTexture(&mTexture);
+	mColor = PlayerColor;
 }
 
 bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
