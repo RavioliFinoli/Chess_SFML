@@ -18,6 +18,6 @@ public:
 private:
 	ChessSquare* Squares[8][8];
 
-	std::vector<ChessPiece*> Pawns;
+	std::vector<ChessPiece*> Pieces;
 };
 

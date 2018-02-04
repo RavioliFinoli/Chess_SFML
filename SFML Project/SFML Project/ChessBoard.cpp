@@ -19,15 +19,15 @@ ChessBoard::ChessBoard()
 			{
 				ChessPiece* pawn = new Pawn();
 				pawn->Initialize(sf::Color::White, SquarePosition);
-				Pawns.push_back(pawn);
-				Squares[row][col]->SetPieceOccupyingSquare(Pawns.back());
+				Pieces.push_back(pawn);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
 			}
 			if (row == 1)
 			{
 				ChessPiece* pawn = new Pawn();
 				pawn->Initialize(sf::Color::Black, SquarePosition);
-				Pawns.push_back(pawn);
-				Squares[row][col]->SetPieceOccupyingSquare(Pawns.back());
+				Pieces.push_back(pawn);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
 			}
 
 
@@ -52,13 +52,13 @@ void ChessBoard::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		}
 	}
 
-	for (auto& pawn : Pawns)
+	for (auto& pawn : Pieces)
 		target.draw(*pawn, states);
 }
 
 std::vector<ChessPiece*>* ChessBoard::GetPiecesVector()
 {
-	return &Pawns;
+	return &Pieces;
 }
 
 ChessSquare* ChessBoard::GetSquare(int row, int col)
