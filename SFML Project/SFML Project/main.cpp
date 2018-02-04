@@ -5,7 +5,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(512, 512), "Game Window");
+	sf::RenderWindow window(sf::VideoMode(1024, 1024), "Game Window");
 	Game game;
 	game.SetWindow(&window);
 	sf::Clock gameTime;

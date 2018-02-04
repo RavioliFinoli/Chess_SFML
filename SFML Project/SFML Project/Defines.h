@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#define SQUARE_SIZE 64
+#define SQUARE_SIZE 128
 #define BLACK sf::Color::Black 
 #define WHITE sf::Color::White 
 //
