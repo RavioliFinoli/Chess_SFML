@@ -61,8 +61,10 @@ void Game::Update(float DeltaTime)
 					if (!Piece)
 					{
 						mHeldPiece->SetPosition(Square->GetPosition());
+						mHeldPiece->SetHasMoved(true);
 						Square->SetPieceOccupyingSquare(mHeldPiece);
 						mHeldPiece = nullptr;
+						
 						EndTurn();
 					}
 				}

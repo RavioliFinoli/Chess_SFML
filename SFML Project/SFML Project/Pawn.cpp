@@ -29,7 +29,7 @@ bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
 
 	
 	//White pieces move "up" to go forward, black moves down
-	if (IsWithinRange(DeltaY*ColorMultiplier, 0, 2) && (DeltaX) == 0)
+	if (IsWithinRange(DeltaY*ColorMultiplier, 0, 2 - bHasMoved) && (DeltaX) == 0)
 	{
 		return true;
 	}
