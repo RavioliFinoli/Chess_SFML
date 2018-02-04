@@ -22,8 +22,8 @@ private:
 
 
 	ChessBoard mChessBoard;
-
 	ChessPiece* mHeldPiece = nullptr;
+	sf::Vector2u mHeldPieceOrigin = sf::Vector2u();
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
