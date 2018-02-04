@@ -9,4 +9,4 @@
 sf::Vector2i GetSquareIndexUnderMouse(sf::Vector2i inBoardOrigin, sf::RenderWindow& inWindow);
 bool SquareIndexIsValid(sf::Vector2i Index);
 bool IsWithinRange(int x, int min, int max);
-void RemovePiece(std::vector<ChessPiece*> Pieces, ChessPiece* PieceToRemove);
+void RemovePiece(std::vector<ChessPiece*>& Pieces, ChessPiece* PieceToRemove);
