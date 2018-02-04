@@ -9,6 +9,9 @@ public:
 	~ChessPiece();
 	virtual void Initialize(sf::Color PlayerColor, sf::Vector2f Position) = 0;
 
+private:
+
+	sf::Color mColor;
 	sf::RectangleShape mSprite;
 	sf::Texture mTexture;
 
