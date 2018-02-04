@@ -10,6 +10,11 @@ sf::Vector2i GetSquareIndexUnderMouse(sf::Vector2i inBoardOrigin, sf::RenderWind
 	return Index;
 }
 
+bool SquareIndexIsValid(sf::Vector2i Index)
+{
+	return (Index.x < 8 && Index.y < 8 && Index.x > -1 && Index.y > -1);
+}
+
 bool IsWithinRange(int x, int min, int max)
 {
 	return (x >= min && x <= max);
