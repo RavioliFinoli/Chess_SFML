@@ -18,7 +18,7 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
 	sf::RectangleShape mSprite;
-
+	sf::Texture mTexture;
 	ChessPiece* PieceOccupyingSquare = nullptr;
 	sf::Vector2u PositionIndex;
 	sf::Vector2f Position;
