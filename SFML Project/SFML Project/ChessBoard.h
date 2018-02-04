@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Pawn.h"
+
 #include "ChessSquare.h"
 #include <vector>
 

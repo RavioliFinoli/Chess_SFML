@@ -1,5 +1,6 @@
 #include "ChessBoard.h"
-
+#include "Pawn.h"
+#include "Rook.h"
 
 
 ChessBoard::ChessBoard()
@@ -11,7 +12,7 @@ ChessBoard::ChessBoard()
 		{
 
 			sf::Vector2f SquarePosition((float)SQUARE_SIZE * col, (float)SQUARE_SIZE * row);
-			sf::Color SquareColor = (bIsBlack ? sf::Color::Green : sf::Color::White);
+			sf::Color SquareColor = (bIsBlack ? sf::Color(0, 190, 0, 255) : sf::Color::White);
 			Squares[row][col] = new ChessSquare();
 			Squares[row][col]->Initialize(SquareColor, sf::Vector2u(row, col), SquarePosition);
 
@@ -27,6 +28,22 @@ ChessBoard::ChessBoard()
 				ChessPiece* pawn = new Pawn();
 				pawn->Initialize(sf::Color::Black, SquarePosition);
 				Pieces.push_back(pawn);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+			//Black Rooks
+			if ((row == 0 && col == 0) || (row == 0 && col == 7))
+			{
+				ChessPiece* rook = new Rook();
+				rook->Initialize(BLACK, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+			//White Rooks
+			if ((row == 7 && col == 0) || (row == 7 && col == 7))
+			{
+				ChessPiece* rook = new Rook();
+				rook->Initialize(WHITE, SquarePosition);
+				Pieces.push_back(rook);
 				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
 			}
 
