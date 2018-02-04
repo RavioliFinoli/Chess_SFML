@@ -39,6 +39,28 @@ bool Rook::IsMoveLegal(ChessBoard* Board, sf::Vector2u Origin, sf::Vector2u Dest
 
 	//Check if any pieces are blocking our path
 	{
+
+		//Moving vertically (column)
+		if (DeltaY != 0)
+		{
+			int DirectionMultiplier = (DeltaY > 0 ? -1 : 1);
+			for (int i = 0; i < abs(DeltaY); i++)
+			{
+				ChessPiece* PieceOnSquare = Board->GetSquare(Origin.x, Origin.y + (i * DirectionMultiplier))->GetPieceOccupyingSquare();
+				if (PieceOnSquare)
+					return false;
+			}
+		}
+		else
+		{
+			int DirectionMultiplier = (DeltaX > 0 ? -1 : 1);
+			for (int i = 0; i < abs(DeltaX); i++)
+			{
+				ChessPiece* PieceOnSquare = Board->GetSquare(Origin.x + (i * DirectionMultiplier), Origin.y)->GetPieceOccupyingSquare();
+				if (PieceOnSquare)
+					return false;
+			}
+		}
 		return true;
 	}
 	
