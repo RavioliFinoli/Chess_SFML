@@ -40,8 +40,8 @@ void Game::Update(float DeltaTime)
 		{
 			auto MousePosition = sf::Mouse::getPosition(*mWindow);
 			sf::Vector2f NewPosition;
-			NewPosition.x = MousePosition.x;
-			NewPosition.y = MousePosition.y;
+			NewPosition.x = MousePosition.x - (SQUARE_SIZE / 2.0f);
+			NewPosition.y = MousePosition.y - (SQUARE_SIZE / 2.0f);
 			mHeldPiece->SetPosition(NewPosition);
 		}
 	}
