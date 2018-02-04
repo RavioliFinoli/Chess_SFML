@@ -14,6 +14,7 @@ protected:
 	sf::Color mColor;
 	sf::RectangleShape mSprite;
 	sf::Texture mTexture;
+	bool bHasMoved = false;
 
 public:
 	virtual bool IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination) = 0;
