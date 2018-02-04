@@ -20,5 +20,6 @@ public:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	void SetPosition(sf::Vector2f inPosition);
+	sf::Color GetColor();
 };
 

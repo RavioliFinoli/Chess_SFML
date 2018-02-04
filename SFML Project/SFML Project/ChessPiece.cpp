@@ -20,3 +20,8 @@ void ChessPiece::SetPosition(sf::Vector2f inPosition)
 {
 	mSprite.setPosition(inPosition);
 }
+
+sf::Color ChessPiece::GetColor()
+{
+	return mColor;
+}
