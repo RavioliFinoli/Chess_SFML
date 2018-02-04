@@ -9,3 +9,8 @@ sf::Vector2i GetSquareIndexUnderMouse(sf::Vector2i inBoardOrigin, sf::RenderWind
 	Index.y = (int)(((float)MousePosition.y - (float)inBoardOrigin.y) / (float)SQUARE_SIZE);
 	return Index;
 }
+
+bool IsWithinRange(int x, int min, int max)
+{
+	return (x >= min && x <= max);
+}
