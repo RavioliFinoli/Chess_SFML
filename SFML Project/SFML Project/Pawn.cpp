@@ -21,6 +21,11 @@ void Pawn::Initialize(sf::Color PlayerColor, sf::Vector2f Position)
 
 bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
 {
+	//Check if Origin and Destination are equal; if so, act as if move is illegal
+	{
+		if (Origin == Destination)
+			return false;
+	}
 	//Check if moving "forward"
 	int DeltaX = Origin.x - Destination.x;
 	int DeltaY = Origin.y - Destination.y;
