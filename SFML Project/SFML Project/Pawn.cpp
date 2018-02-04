@@ -33,7 +33,7 @@ bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
 	{
 		return true;
 	}
-	else if (DeltaY == 0 && DeltaX == 1)
+	else if (DeltaY == 1 && abs(DeltaX) == 1)
 	{
 		return true;
 	}
