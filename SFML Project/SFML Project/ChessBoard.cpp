@@ -56,6 +56,11 @@ void ChessBoard::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		target.draw(*pawn, states);
 }
 
+std::vector<ChessPiece*>* ChessBoard::GetPiecesVector()
+{
+	return &Pawns;
+}
+
 ChessSquare* ChessBoard::GetSquare(int row, int col)
 {
 	return Squares[col][row];

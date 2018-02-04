@@ -13,6 +13,7 @@ public:
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
+	std::vector<ChessPiece*>* GetPiecesVector();
 	ChessSquare* GetSquare(int row, int col);
 private:
 	ChessSquare* Squares[8][8];
