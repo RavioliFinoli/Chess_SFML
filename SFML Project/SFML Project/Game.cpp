@@ -53,7 +53,7 @@ void Game::Update(float DeltaTime)
 
 			if (SquareIndexIsValid(Index))
 			{
-				if ( mHeldPiece->IsMoveLegal(mHeldPieceOrigin, sf::Vector2u(Index.x, Index.y)) )
+				if ( mHeldPiece->IsMoveLegal(&mChessBoard, mHeldPieceOrigin, sf::Vector2u(Index.x, Index.y)) )
 				{
 					ChessSquare* Square = mChessBoard.GetSquare(Index.x, Index.y);
 					ChessPiece* Piece = Square->GetPieceOccupyingSquare();
@@ -66,6 +66,21 @@ void Game::Update(float DeltaTime)
 						mHeldPiece = nullptr;
 						
 						EndTurn();
+					}
+					else //there's a piece on destination square; check if it's opponents piece
+						 //and if so, capture it.
+					{
+						if (Piece->GetColor() != mColorOfCurrentPlayer)
+						{
+							std::vector<ChessPiece*>* Pieces = mChessBoard.GetPiecesVector();
+							RemovePiece(Pieces, Piece);
+							mHeldPiece->SetPosition(Square->GetPosition());
+							mHeldPiece->SetHasMoved(true);
+							Square->SetPieceOccupyingSquare(mHeldPiece);
+							mHeldPiece = nullptr;
+
+							EndTurn();
+						}
 					}
 				}
 				else //if move isnt legal, return piece to its origin
