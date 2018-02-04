@@ -1,5 +1,5 @@
 #include "Pawn.h"
-
+#include "ChessBoard.h"
 
 
 void Pawn::Initialize(sf::Color PlayerColor, sf::Vector2f Position)
@@ -19,7 +19,7 @@ void Pawn::Initialize(sf::Color PlayerColor, sf::Vector2f Position)
 	mColor = PlayerColor;
 }
 
-bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
+bool Pawn::IsMoveLegal(ChessBoard* Board, sf::Vector2u Origin, sf::Vector2u Destination)
 {
 	//Check if Origin and Destination are equal; if so, act as if move is illegal
 	{
@@ -40,7 +40,16 @@ bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
 	}
 	else if (DeltaY == ColorMultiplier && abs(DeltaX) == 1)
 	{
-		return true;
+		ChessPiece* PieceOnDestination = Board->GetSquare(Destination.x, Destination.y)->GetPieceOccupyingSquare();
+		sf::Color ColorOfPieceOnDestination;
+		if (PieceOnDestination)
+		{
+			ColorOfPieceOnDestination = PieceOnDestination->GetColor();
+			if (ColorOfPieceOnDestination != mColor)
+				return true;
+			else return false;
+		}
+		else return false;
 	}
 	else
 	{
