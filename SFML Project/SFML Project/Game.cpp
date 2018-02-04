@@ -9,6 +9,8 @@ Game::Game() :mPlayer(1)
 		std::cout << "ERROR: Background image could not be loaded.\n---" << std::endl;
 	}
 	mBackgroundSprite.setTexture(mBackgroundTex);
+	mPlayerTurnText.setString(sf::String("White's turn"));
+	mPlayerTurnText.setPosition(sf::Vector2f(0.0, 0.0));
 }
 
 void Game::Update(float DeltaTime)
@@ -26,7 +28,7 @@ void Game::Update(float DeltaTime)
 			{
 				ChessSquare* Square = mChessBoard.GetSquare(Index.x, Index.y);
 				ChessPiece* Piece = Square->GetPieceOccupyingSquare();
-				if (Piece)
+				if (Piece && Piece->GetColor() == mColorOfCurrentPlayer)
 				{
 					Square->SetPieceOccupyingSquare(nullptr);
 					mHeldPiece = Piece;
@@ -61,6 +63,7 @@ void Game::Update(float DeltaTime)
 						mHeldPiece->SetPosition(Square->GetPosition());
 						Square->SetPieceOccupyingSquare(mHeldPiece);
 						mHeldPiece = nullptr;
+						EndTurn();
 					}
 				}
 				else //if move isnt legal, return piece to its origin
@@ -80,10 +83,16 @@ void Game::SetWindow(sf::RenderWindow* inWindow)
 	mWindow = inWindow;
 }
 
+void Game::EndTurn()
+{
+	mColorOfCurrentPlayer = (mColorOfCurrentPlayer == WHITE ? BLACK : WHITE);
+}
+
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	// Make sure everything in the game is drawn.
 	//target.draw(mBackgroundSprite, states);
 	//target.draw(mPlayer, states);
 	target.draw(mChessBoard);
+	target.draw(mPlayerTurnText);
 }

@@ -13,13 +13,17 @@ public:
 
 	void Update(float DeltaTime);
 	void SetWindow(sf::RenderWindow* inWindow);
+
+	void EndTurn();
 private:
 	sf::RenderWindow* mWindow;
 
 	sf::Texture mBackgroundTex;
+	sf::Text mPlayerTurnText;
 	sf::Sprite mBackgroundSprite;
 	Player mPlayer;
 
+	sf::Color mColorOfCurrentPlayer = WHITE;
 
 	ChessBoard mChessBoard;
 	ChessPiece* mHeldPiece = nullptr;
