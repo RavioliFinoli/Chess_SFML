@@ -21,7 +21,26 @@ void Pawn::Initialize(sf::Color PlayerColor, sf::Vector2f Position)
 
 bool Pawn::IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination)
 {
-	return false;
+	//Check if moving "forward"
+	int DeltaX = Origin.x - Destination.x;
+	int DeltaY = Origin.y - Destination.y;
+
+	int ColorMultiplier = (mColor == WHITE ? 1 : 1);
+
+	
+	//White pieces move "up" to go forward, black moves down
+	if (IsWithinRange(DeltaY * ColorMultiplier, 0, 2*ColorMultiplier) && (DeltaX) == 0)
+	{
+		return true;
+	}
+	else if (DeltaY == 0 && DeltaX == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 Pawn::Pawn()
