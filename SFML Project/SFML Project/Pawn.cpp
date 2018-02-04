@@ -36,6 +36,18 @@ bool Pawn::IsMoveLegal(ChessBoard* Board, sf::Vector2u Origin, sf::Vector2u Dest
 	//White pieces move "up" to go forward, black moves down
 	if (IsWithinRange(DeltaY*ColorMultiplier, 0, 2 - bHasMoved) && (DeltaX) == 0)
 	{
+		//Check if destination has a piece on it
+		ChessPiece* PieceOnDestination = Board->GetSquare(Destination.x, Destination.y)->GetPieceOccupyingSquare();
+		if (PieceOnDestination)
+			return false;
+
+		//Before we attempt to move 2 steps, make sure nothing is blocking our path there
+		if (DeltaY == 2 * ColorMultiplier) 
+		{
+			ChessPiece* PieceBlockingPath = Board->GetSquare(Destination.x, Destination.y + ColorMultiplier)->GetPieceOccupyingSquare();
+			if (PieceBlockingPath)
+				return false;
+		}
 		return true;
 	}
 	else if (DeltaY == ColorMultiplier && abs(DeltaX) == 1)
