@@ -22,16 +22,16 @@ bool IsWithinRange(int x, int min, int max)
 	return (x >= min && x <= max);
 }
 
-void RemovePiece(std::vector<ChessPiece*>& Pieces, ChessPiece* PieceToRemove)
+void RemovePiece(std::vector<ChessPiece*>* Pieces, ChessPiece* PieceToRemove)
 {
 	assert(PieceToRemove);
 
-	for (int i = 0; i < Pieces.size(); i++)
+	for (int i = 0; i < Pieces->size(); i++)
 	{
-		if (Pieces[i] = PieceToRemove)
+		ChessPiece* curr = (*Pieces)[i];
+		if (curr == PieceToRemove)
 		{
-			Pieces.erase(Pieces.begin() + i);
-			delete PieceToRemove;
+			Pieces->erase((Pieces->begin() + i));
 		}
 	}
 }
