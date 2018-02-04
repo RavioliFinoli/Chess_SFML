@@ -15,7 +15,14 @@ ChessBoard::ChessBoard()
 			Squares[row][col] = new ChessSquare();
 			Squares[row][col]->Initialize(SquareColor, sf::Vector2u(row, col), SquarePosition);
 
-			if (row == 1 || row == 6)
+			if (row == 6)
+			{
+				ChessPiece* pawn = new Pawn();
+				pawn->Initialize(sf::Color::White, SquarePosition);
+				Pawns.push_back(pawn);
+				Squares[row][col]->SetPieceOccupyingSquare(Pawns.back());
+			}
+			if (row == 1)
 			{
 				ChessPiece* pawn = new Pawn();
 				pawn->Initialize(sf::Color::Black, SquarePosition);
