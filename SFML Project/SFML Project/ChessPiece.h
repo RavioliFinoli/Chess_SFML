@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
+class ChessBoard;
+
 class ChessPiece :
 	public sf::Drawable
 {
@@ -17,7 +19,7 @@ protected:
 	bool bHasMoved = false;
 
 public:
-	virtual bool IsMoveLegal(sf::Vector2u Origin, sf::Vector2u Destination) = 0;
+	virtual bool IsMoveLegal(ChessBoard* Board, sf::Vector2u Origin, sf::Vector2u Destination) = 0;
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	void SetPosition(sf::Vector2f inPosition);
