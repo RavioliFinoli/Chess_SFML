@@ -1,7 +1,11 @@
 #include "ChessBoard.h"
 #include "Pawn.h"
 #include "Rook.h"
-
+#include "Knight.h"
+#include "Bishop.h"
+#include "King.h"
+#include "Queen.h"
+#include <assert.h>
 
 ChessBoard::ChessBoard()
 {
@@ -47,6 +51,74 @@ ChessBoard::ChessBoard()
 				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
 			}
 
+			//Black Knights
+			if ((row == 0 && col == 1) || (row == 0 && col == 6))
+			{
+				ChessPiece* rook = new Knight();
+				rook->Initialize(BLACK, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+			//White Knights
+			if ((row == 7 && col == 1) || (row == 7 && col == 6))
+			{
+				ChessPiece* rook = new Knight();
+				rook->Initialize(WHITE, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+
+			//Black Bishops
+			if ((row == 0 && col == 2) || (row == 0 && col == 5))
+			{
+				ChessPiece* rook = new Bishop();
+				rook->Initialize(BLACK, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+			//White Knights
+			if ((row == 7 && col == 2) || (row == 7 && col == 5))
+			{
+				ChessPiece* rook = new Bishop();
+				rook->Initialize(WHITE, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+
+			//Black King
+			if ((row == 0 && col == 4))
+			{
+				ChessPiece* rook = new King();
+				rook->Initialize(BLACK, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+			//White King
+			if ((row == 7 && col == 4) )
+			{
+				ChessPiece* rook = new King();
+				rook->Initialize(WHITE, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+
+			//Black Queen
+			if ((row == 0 && col == 3))
+			{
+				ChessPiece* rook = new Queen();
+				rook->Initialize(BLACK, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+			//White Queen
+			if ((row == 7 && col == 3))
+			{
+				ChessPiece* rook = new Queen();
+				rook->Initialize(WHITE, SquarePosition);
+				Pieces.push_back(rook);
+				Squares[row][col]->SetPieceOccupyingSquare(Pieces.back());
+			}
+
 
 			if (col != 7)
 				bIsBlack = !bIsBlack;
@@ -80,5 +152,7 @@ std::vector<ChessPiece*>* ChessBoard::GetPiecesVector()
 
 ChessSquare* ChessBoard::GetSquare(int row, int col)
 {
+	assert(!(row < 0 || row > 7 || col < 0 || col > 7));
+
 	return Squares[col][row];
 }
