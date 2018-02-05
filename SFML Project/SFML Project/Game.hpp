@@ -5,6 +5,7 @@
 #include "Player.hpp"
 #include "ChessBoard.h"
 #include "Pawn.h"
+#include "Timer.h"
 
 class Game : public sf::Drawable
 {
@@ -22,6 +23,10 @@ private:
 	sf::Text mPlayerTurnText;
 	sf::Sprite mBackgroundSprite;
 	Player mPlayer;
+
+	sf::Font mTimerFont;
+	Timer* BlackTimer;
+	Timer* WhiteTimer;
 
 	sf::Color mColorOfCurrentPlayer = WHITE;
 

@@ -8,9 +8,18 @@ Game::Game() :mPlayer(1)
 		// Handle error: Print error message.
 		std::cout << "ERROR: Background image could not be loaded.\n---" << std::endl;
 	}
+
+	if (!mTimerFont.loadFromFile("../Resources/ClockFont.ttf"))
+	{
+		// Handle error: Print error message.
+		std::cout << "ERROR: ClockFont could not be loaded.\n---" << std::endl;
+	}
 	mBackgroundSprite.setTexture(mBackgroundTex);
 	mPlayerTurnText.setString(sf::String("White's turn"));
 	mPlayerTurnText.setPosition(sf::Vector2f(0.0, 0.0));
+
+	BlackTimer = new Timer(mTimerFont, sf::Vector2f(0.0, 0.0));
+	WhiteTimer = new Timer(mTimerFont, sf::Vector2f(0.0, 512.0));
 }
 
 void Game::Update(float DeltaTime)
@@ -18,7 +27,7 @@ void Game::Update(float DeltaTime)
 	// Make sure everything in the game is updated (if needed).
 	mPlayer.Update(DeltaTime);
 
-	sf::Vector2i Index = GetSquareIndexUnderMouse(sf::Vector2i(0, 0), *mWindow);
+	sf::Vector2i Index = GetSquareIndexUnderMouse(sf::Vector2i(LEFT_SIDE_OFFSET, 0), *mWindow);
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
@@ -100,6 +109,8 @@ void Game::Update(float DeltaTime)
 			}
 		}
 	}
+	BlackTimer->Update();
+	WhiteTimer->Update();
 }
 
 void Game::SetWindow(sf::RenderWindow* inWindow)
@@ -109,7 +120,18 @@ void Game::SetWindow(sf::RenderWindow* inWindow)
 
 void Game::EndTurn()
 {
+	if (mColorOfCurrentPlayer == BLACK)
+	{
+		BlackTimer->Pause();
+		WhiteTimer->Start();
+	}
+	else
+	{	
+		WhiteTimer->Pause();
+		BlackTimer->Start();
+	}
 	mColorOfCurrentPlayer = (mColorOfCurrentPlayer == WHITE ? BLACK : WHITE);
+
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -119,4 +141,6 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	//target.draw(mPlayer, states);
 	target.draw(mChessBoard);
 	target.draw(mPlayerTurnText);
+	target.draw(*BlackTimer);
+	target.draw(*WhiteTimer);
 }
