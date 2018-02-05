@@ -1,4 +1,6 @@
 #include "Timer.h"
+#include <iomanip> // setprecision
+#include <sstream> // stringstream
 
 
 
@@ -18,8 +20,15 @@ void Timer::Update()
 	if (bTicking)
 	{
 		mTimeLeft -= mClock.getElapsedTime();
-		mTimeText.setString(std::to_string(mTimeLeft.asSeconds()));
+
+		std::stringstream stream;
+		stream << std::fixed << std::setprecision(1) << mTimeLeft.asSeconds();
+		std::string s = stream.str();
+
+		mTimeText.setString(s.c_str());
+		mClock.restart();
 	}
+
 }
 
 void Timer::draw(sf::RenderTarget& target, sf::RenderStates states) const
