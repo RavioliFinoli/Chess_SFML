@@ -11,7 +11,7 @@ ChessBoard::ChessBoard()
 		for (int col = 0; col < 8; col++)
 		{
 
-			sf::Vector2f SquarePosition((float)SQUARE_SIZE * col, (float)SQUARE_SIZE * row);
+			sf::Vector2f SquarePosition(LEFT_SIDE_OFFSET + (float)SQUARE_SIZE * col, (float)SQUARE_SIZE * row);
 			sf::Color SquareColor = (bIsBlack ? sf::Color(0, 190, 0, 255) : sf::Color::White);
 			Squares[row][col] = new ChessSquare();
 			Squares[row][col]->Initialize(SquareColor, sf::Vector2u(row, col), SquarePosition);
