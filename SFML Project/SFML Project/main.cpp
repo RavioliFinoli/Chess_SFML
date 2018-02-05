@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
+#include "Defines.h"
 
 
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1024, 1024), "Game Window");
+	sf::RenderWindow window(sf::VideoMode(LEFT_SIDE_OFFSET + (8 * SQUARE_SIZE),(8 * SQUARE_SIZE)), "Game Window");
 	Game game;
 	game.SetWindow(&window);
 	sf::Clock gameTime;
