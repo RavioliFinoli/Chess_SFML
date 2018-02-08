@@ -90,6 +90,13 @@ void Game::Update(float DeltaTime)
 
 							EndTurn();
 						}
+						else //there's a friendly piece on the square; return piece to its origin
+						{
+							ChessSquare* Square = mChessBoard.GetSquare(mHeldPieceOrigin.x, mHeldPieceOrigin.y);
+							mHeldPiece->SetPosition(Square->GetPosition());
+							Square->SetPieceOccupyingSquare(mHeldPiece);
+							mHeldPiece = nullptr;
+						}
 					}
 				}
 				else //if move isnt legal, return piece to its origin
